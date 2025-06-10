@@ -1,0 +1,596 @@
+/* Minimalist & Eye-Pleasing Portfolio Style - Mobile Enhanced */
+
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+/* SMOOTH SCROLLING */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: #fafafa;
+  color: #24352b;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 3rem;
+  background: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+}
+
+header a.logo {
+  font-weight: 700;
+  font-size: 1.8rem;
+  color: #36463d;
+  text-decoration: none;
+  letter-spacing: 1.2px;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.logo-img {
+  width: 32px;
+  height: 32px;
+  margin-right: 0.5rem;
+  object-fit: contain;
+}
+
+nav {
+  display: flex;
+  gap: 2.5rem;
+}
+
+nav a {
+  color: #36463d;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  position: relative;
+  transition: color 0.35s ease;
+  white-space: nowrap;
+}
+
+nav a::after {
+  content: '';
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  bottom: -5px;
+  left: 0;
+  background-color: #36463d;
+  transition: width 0.3s ease;
+}
+
+nav a:hover {
+  color: #36463d;
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+.section {
+  max-width: 900px;
+  margin: 4rem auto;
+  padding: 0 1rem;
+  width: 100%;
+  scroll-margin-top: 100px; /* Offset for sticky header */
+}
+
+h2 {
+  font-weight: 700;
+  font-size: 2.4rem;
+  color: #2c5037;
+  margin-bottom: 2rem;
+  letter-spacing: 0.03em;
+  border-left: 6px solid #36463d;
+  padding-left: 0.5rem;
+}
+
+.work-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  align-items: start;
+  width: 100%;
+}
+
+.work-item {
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(41, 185, 72, 0.1);
+  background: #fff;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  position: relative;
+  width: 100%;
+}
+
+.work-item:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 12px 36px rgba(41, 185, 89, 0.25);
+}
+
+.work-item a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.work-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.4s ease;
+}
+
+.work-item:hover img {
+  transform: scale(1.05);
+}
+
+.work-title {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(54, 70, 61, 0.95), rgba(54, 70, 61, 0.7), transparent);
+  color: white;
+  padding: 1.5rem 1rem 1rem;
+  font-weight: 600;
+  font-size: 1.1rem;
+  letter-spacing: 0.02em;
+  transform: translateY(100%);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  text-align: center;
+}
+
+.work-item:hover .work-title {
+  transform: translateY(0);
+}
+
+.about-gallery {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  width: 100%;
+  position: relative;
+}
+
+.about-gallery img {
+  width: 200px;
+  height: auto;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(41, 185, 60, 0.1);
+  cursor: zoom-in;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  object-fit: cover;
+  object-position: center;
+  max-width: 100%;
+}
+
+.about-gallery img:hover {
+  box-shadow: 0 12px 36px rgba(41, 185, 72, 0.25);
+  transform: scale(1.04);
+}
+
+.zoomed {
+  transform: scale(2.5) !important;
+  cursor: zoom-out;
+  z-index: 1002;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(31, 141, 99, 0.5);
+  border-radius: 8px;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Create overlay effect when image is zoomed */
+.about-gallery::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(3px);
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.about-gallery.has-zoomed::before {
+  opacity: 1;
+  visibility: visible;
+}
+
+form {
+  max-width: 420px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+input, textarea {
+  padding: 0.85rem 1.25rem;
+  margin-bottom: 1.25rem;
+  font-size: 1.1rem;
+  border-radius: 10px;
+  border: 1.5px solid #36463d;
+  background: #f9fcfa;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  font-weight: 500;
+  resize: vertical;
+  width: 100%;
+}
+
+input:focus, textarea:focus {
+  outline: none;
+  border-color: #36463d;
+  box-shadow: 0 0 12px rgba(41, 185, 101, 0.25);
+}
+
+button {
+  padding: 0.9rem 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 12px;
+  background: #36463d;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.35s ease, box-shadow 0.35s ease;
+  box-shadow: 0 6px 15px rgba(41, 185, 84, 0.4);
+  width: 100%;
+}
+
+button:hover {
+  background: #36463d;
+  box-shadow: 0 9px 24px rgba(27, 139, 64, 0.6);
+}
+
+#topBtn {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: rgba(54, 70, 61, 0.9);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  width: 48px;
+  height: 48px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: none;
+  z-index: 1000;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 12px rgba(54, 70, 61, 0.2);
+  align-items: center;
+  justify-content: center;
+}
+
+#topBtn.show {
+  display: flex;
+}
+
+#topBtn:hover {
+  background: rgba(54, 70, 61, 1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(54, 70, 61, 0.3);
+}
+
+#topBtn:active {
+  transform: translateY(0);
+}
+
+img {
+  vertical-align: top;
+  max-width: 100%;
+  height: auto;
+}
+
+/* ENHANCED MOBILE STYLES */
+
+/* Large tablets and small desktops */
+@media (max-width: 1024px) {
+  header {
+    padding: 1rem 2rem;
+  }
+  
+  .section {
+    margin: 3rem auto;
+    padding: 0 1.5rem;
+    scroll-margin-top: 80px;
+  }
+  
+  .work-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+  
+  h2 {
+    font-size: 2.2rem;
+  }
+}
+
+/* Tablets */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    gap: 1rem;
+  }
+
+  header a.logo {
+    font-size: 1.6rem;
+  }
+
+  .logo-img {
+    width: 28px;
+    height: 28px;
+  }
+
+  nav {
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  nav a {
+    font-size: 0.95rem;
+  }
+
+  .section {
+    margin: 2.5rem auto;
+    padding: 0 1rem;
+    scroll-margin-top: 120px;
+  }
+
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .work-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .about-gallery {
+    gap: 1rem;
+    justify-content: center;
+  }
+
+  .about-gallery img {
+    width: 150px;
+  }
+
+  .zoomed {
+    transform: scale(2.2) !important;
+  }
+
+  form {
+    max-width: 100%;
+    padding: 0 1rem;
+  }
+
+  input, textarea {
+    font-size: 1rem;
+    padding: 0.75rem 1rem;
+  }
+
+  button {
+    font-size: 1.1rem;
+    padding: 0.8rem 0;
+  }
+
+  .work-title {
+    font-size: 1rem;
+    padding: 1.2rem 0.8rem 0.8rem;
+  }
+
+  #topBtn {
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 44px;
+    height: 44px;
+    font-size: 1.1rem;
+  }
+}
+
+/* Mobile phones */
+@media (max-width: 480px) {
+  header {
+    padding: 0.8rem 1rem;
+  }
+
+  header a.logo {
+    font-size: 1.4rem;
+  }
+
+  .logo-img {
+    width: 24px;
+    height: 24px;
+  }
+
+  nav {
+    gap: 1rem;
+  }
+
+  nav a {
+    font-size: 0.9rem;
+  }
+
+  .section {
+    margin: 2rem auto;
+    padding: 0 0.8rem;
+    scroll-margin-top: 140px;
+  }
+
+  h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.2rem;
+    border-left-width: 4px;
+  }
+
+  .work-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .work-item {
+    margin: 0 auto;
+    max-width: 100%;
+  }
+
+  .about-gallery {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .about-gallery img {
+    width: 200px;
+    max-width: 90vw;
+  }
+
+  .zoomed {
+    transform: scale(2.8) !important;
+  }
+
+  form {
+    padding: 0 0.5rem;
+  }
+
+  input, textarea {
+    font-size: 16px; /* Prevents zoom on iOS */
+    padding: 0.7rem 0.9rem;
+    margin-bottom: 1rem;
+  }
+
+  button {
+    font-size: 1rem;
+    padding: 0.75rem 0;
+  }
+
+  .work-title {
+    font-size: 0.95rem;
+    padding: 1rem 0.6rem 0.6rem;
+  }
+
+  #topBtn {
+    bottom: 1rem;
+    right: 1rem;
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+}
+
+/* Very small screens */
+@media (max-width: 360px) {
+  header a.logo {
+    font-size: 1.2rem;
+  }
+
+  nav a {
+    font-size: 0.85rem;
+  }
+
+  h2 {
+    font-size: 1.6rem;
+  }
+
+  .about-gallery img {
+    width: 180px;
+  }
+
+  .zoomed {
+    transform: scale(3.2) !important;
+  }
+
+  .section {
+    scroll-margin-top: 160px;
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .work-item:hover {
+    transform: none;
+  }
+  
+  .work-item:active {
+    transform: translateY(-8px);
+  }
+
+  .work-title {
+    transform: translateY(0);
+    background: linear-gradient(to top, rgba(54, 70, 61, 0.9), rgba(54, 70, 61, 0.6), transparent);
+  }
+
+  .about-gallery img:hover {
+    transform: none;
+  }
+  
+  .about-gallery img:active {
+    transform: scale(1.02);
+  }
+}
+
+/* Landscape phone orientation */
+@media (max-width: 768px) and (orientation: landscape) {
+  header {
+    flex-direction: row;
+    padding: 0.8rem 1.5rem;
+  }
+
+  nav {
+    gap: 1.2rem;
+  }
+
+  .work-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+
+  .section {
+    margin: 1.5rem auto;
+    scroll-margin-top: 100px;
+  }
+
+  h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+}
